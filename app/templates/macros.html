@@ -1,0 +1,24 @@
+<!-- Displaying movie list macro  -->
+{% macro displayPitchList(movie_list) %}
+
+    {% for pitch in pitch_list %}
+        <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 movie-card">
+            <li class="text-center">
+            </li>
+        </div>
+
+    {% endfor %}
+
+{% endmacro %}
+
+<!-- Displaying reviews macro -->
+{% macro displayReviews(review_list) %}
+
+    {% for review in review_list %}
+
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 review-card">
+        <h2> {{ review.title}} </h2>
+        <p> {{ review.review | truncate(30) }}</p>
+
+
+

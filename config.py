@@ -1,13 +1,12 @@
 class Config:
-<<<<<<< HEAD
+
+    SECRET_KEY = 'SECRETE'
    
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa2018:12345@localhost/gabpitch'
-=======
     '''
     General configuration parent class
     '''
     pass
->>>>>>> e093d9df398ee9518dc278a60a359257df126007
 
 
 
@@ -31,8 +30,8 @@ class DevConfig(Config):
 
     DEBUG = True
 
-# config_options ={
-#     'development':DevConfig,
-#     'production':ProdConfig,
-#     'test':TestConfig
-# }
+config_options ={
+    'development':DevConfig,
+    'production':ProdConfig,
+    # 'test':TestConfig
+}
