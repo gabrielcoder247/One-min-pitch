@@ -1,8 +1,8 @@
 class Config:
 
-    SECRET_KEY = 'SECRETE'
+    SECRET_KEY = 'SECRET'
    
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa2018:12345@localhost/gabpitch'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gabrielcoder:12345@localhost/gabpitch'
     '''
     General configuration parent class
     '''

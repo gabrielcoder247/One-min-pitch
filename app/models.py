@@ -16,9 +16,12 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255),unique = True,index = True)
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(255))
-    role_id = db.Column(db.Integer,db.ForeignKey('role.id'))
+    bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
+    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     pitches = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
     reviews = db.relationship('Review',backref = 'user', lazy = "dynamic")
+    
 
     @property
     def password(self):
@@ -43,7 +46,7 @@ class Role(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(255))
-    users = db.relationship('User',backref = 'role',lazy="dynamic")
+    users = db.relationship('User',backref = 'role', lazy ="dynamic")
 
     def __repr__(self):
         return 'User {}'.format(self.name)
@@ -53,15 +56,14 @@ class Category(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     name = db.Column(db.String(255))
-    pitches = db.relationship('Pitch',backref = 'category',lazy="dynamic")
+    pitches = db.relationship('Pitch',backref = 'category', lazy="dynamic")
 
     @classmethod
     def get_categories(cls):
-        categories = Category.query.all()
-        return categorie
+        categories = cls.query.all()
+        return categories
 
-    # def __repr__(self):
-    #     return 'User {}'.format(self.name)
+   
 
 
 class Pitch(db.Model):
@@ -71,9 +73,9 @@ class Pitch(db.Model):
     title = db.Column(db.String(255), index = True)
     post = db.Column(db.String(400), index = True)
     time = db.Column(db.DateTime,default =datetime.utcnow)
-    user_id = db.Column(db.Integer,db.ForeignKey('categories.id'))
     category_id = db.Column(db.Integer,db.ForeignKey('categories.id'))
-    reviews = db.relationship('Review',backref = 'pitch',lazy ="dynamics")
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    reviews = db.relationship('Review',backref = 'pitch',lazy ="dynamic")
 
     def save_pitch(self):
         db.session.add(self)
@@ -95,6 +97,7 @@ class Review(db.Model):
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
 
     def save_review(self):
+        
         db.session.add(self)
         db.session.commit()
 
