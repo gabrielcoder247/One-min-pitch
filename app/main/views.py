@@ -46,7 +46,7 @@ def new_pitch(id):
         new_pitch.save_pitch()  
         return redirect(url_for('.category', id = category.id))
     title = f'{category.name} pitches'
-    return render_template('new_pitch.html', title = title, pitch_form = form, category = category)
+    return render_template('new-pitch.html', title = title, pitch_form = form, category = category)
 
 
 @main.route('/pitch/review/new/<int:id>', methods = ['GET','POST'])
@@ -68,7 +68,7 @@ def new_review(id):
         return redirect(url_for('.reviews', id = pitch.id ))
 
     title = f'{pitch.title} review'
-    return render_template('new_review.html', title = title, review_form = form, pitch = pitch)
+    return render_template('new-review.html', title = title, review_form = form, pitch = pitch)
 
 @main.route('/pitch/reviews/<int:id>')
 def reviews(id):
@@ -79,7 +79,7 @@ def reviews(id):
     review = Review.get_reviews(pitch.id)
     title = f'{pitch.title} review'
 
-    return render_template('reviews.html', title = title, pitch = pitch, review = review)
+    return render_template('review.html', title = title, pitch = pitch, review = review)
 
 
 @main.route('/inteview/pitches/')
